@@ -100,6 +100,12 @@ url: window.location.href,
       attributes: getAttributes(currentTarget),
        outerHTML: currentTarget.outerHTML,
        computedStyles: (function(){ const cs = getComputedStyle(currentTarget); const desired = ['color','fontSize','fontFamily','backgroundColor','display','position']; const obj={}; desired.forEach(p=>{ obj[p]=cs.getPropertyValue(p); }); return obj; })(),
+        siblingIndex: (() => {
+           const parent = currentTarget.parentNode;
+           if (!parent) return null;
+           const children = Array.from(parent.children);
+           return children.indexOf(currentTarget);
+        })(),
       rect: {
         top: rect.top + window.scrollY,
         left: rect.left + window.scrollX,
