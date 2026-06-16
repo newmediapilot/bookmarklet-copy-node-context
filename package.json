@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node scripts/buildBookmarklet.js && node scripts/generateIndex.js && vite",
     "build": "node scripts/buildBookmarklet.js && node scripts/generateIndex.js && vite build",
-    "compile": "node scripts/buildBookmarklet.js"
+    "compile": "node scripts/buildBookmarklet.js",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
