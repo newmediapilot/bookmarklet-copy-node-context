@@ -2,8 +2,8 @@
   "name": "bookmarklet-copy-node-context",
   "version": "1.0.0",
   "scripts": {
-    "dev": "node scripts/buildBookmarklet.mjs && node scripts/generateIndex.js && vite",
-    "build": "node scripts/buildBookmarklet.mjs && node scripts/generateIndex.js && vite build",
+    "dev": "node scripts/buildBookmarklet.mjs && node scripts/generateIndex.cjs && vite",
+    "build": "node scripts/buildBookmarklet.mjs && node scripts/generateIndex.cjs && vite build",
     "compile": "node scripts/buildBookmarklet.mjs",
     "deploy": "npm run build && gh-pages -d dist"
   },
