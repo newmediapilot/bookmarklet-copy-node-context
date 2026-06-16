@@ -1,0 +1,29 @@
+{
+  "name": "bookmarklet-copy-node-context",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node scripts/buildBookmarklet.js && node scripts/generateIndex.js && vite",
+    "build": "node scripts/buildBookmarklet.js && node scripts/generateIndex.js && vite build",
+    "compile": "node scripts/buildBookmarklet.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/newmediapilot/bookmarklet-copy-node-context.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/newmediapilot/bookmarklet-copy-node-context/issues"
+  },
+  "homepage": "https://github.com/newmediapilot/bookmarklet-copy-node-context#readme",
+  "dependencies": {
+    "terser": "5.48.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
