@@ -106,7 +106,8 @@ url: window.location.href,
            const children = Array.from(parent.children);
            return children.indexOf(currentTarget);
         })(),
-      rect: {
+      role: currentTarget.getAttribute('role') || null,
+       rect: {
         top: rect.top + window.scrollY,
         left: rect.left + window.scrollX,
         width: rect.width,
