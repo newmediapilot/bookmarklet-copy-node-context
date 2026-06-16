@@ -17,9 +17,13 @@
     if (!el || el.nodeType !== Node.ELEMENT_NODE) return '';
     const parts = [];
     while (el && el.nodeType === Node.ELEMENT_NODE) {
-      let part = el.localName.toLowerCase();
-      if (el.id) part += `#${el.id}`;
-      else if (el.classList.length) part += '.' + [...el.classList].join('.');
+   let part = el.localName.toLowerCase();
+
+  if (el.id) part += `#${el.id}`;
+  else {
+    const classes = [...el.classList].filter(c => c !== 'bookmarklet-highlight');
+    if (classes.length) part += '.' + classes.join('.');
+  }
       parts.unshift(part);
       el = el.parentElement;
     }
@@ -89,7 +93,8 @@
       tag: currentTarget.tagName.toLowerCase(),
       text: currentTarget.textContent.trim(),
       id: currentTarget.id || null,
-      classes: [...currentTarget.classList],
+url: window.location.href,
+      classes: [...currentTarget.classList].filter(c => c !== 'bookmarklet-highlight'),
       selector: getSelector(currentTarget),
       xpath: getXPath(currentTarget),
       attributes: getAttributes(currentTarget),
