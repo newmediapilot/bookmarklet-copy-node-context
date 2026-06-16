@@ -12,3 +12,7 @@ Copies metadata of a selected page element—including selector.
 | `npm run compile` | Compile out code  |
 
 > Copy `out.js` into a bookmark field
+
+## Demo
+
+[Live Demo](https://newmediapilot.github.io/bookmarklet-copy-node-context/)
