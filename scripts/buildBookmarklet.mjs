@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import terser from 'terser';
+
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
