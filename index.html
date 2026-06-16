@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bookmarklet Demo</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    #sample-text { margin-top: 1rem; color: #333; }
+  </style>
+</head>
+<body>
+  <h1>Bookmarklet Demo Page</h1>
+  <p id="sample-text">This is a sample paragraph. Hover over it to test the bookmarklet.</p>
+
+  <button id="run-bookmarklet">Run Bookmarklet</button>
+
+  <script>
+    // Bookmarklet code injected by generateIndex.js
+    const bookmarklet = "(function () { const style = document.createElement('style'); style.textContent = ` .bookmarklet-highlight { box-shadow: inset 0 0 0 3px rgba(0,0,0,.9); } `; document.head.appendChild(style); let currentTarget = null; function getSelector(el) { if (!el || el.nodeType !== Node.ELEMENT_NODE) return ''; const parts = []; while (el && el.nodeType === Node.ELEMENT_NODE) { let part = el.localName.toLowerCase(); if (el.id) part += `#${el.id}`; else { const classes = [...el.classList].filter(c => c !== 'bookmarklet-highlight'); if (classes.length) part += '.' + classes.join('.'); } parts.unshift(part); el = el.parentElement; } return parts.join(' > '); } function getXPath(el) { if (!el || el.nodeType !== Node.ELEMENT_NODE) return ''; const idx = (sibling, name) => { let count = 0; while (sibling) { if (sibling.nodeName === name) count++; sibling = sibling.previousSibling; } return count; }; const walk = el => { if (!el || el.nodeType !== Node.ELEMENT_NODE) return ''; const parent = el.parentNode; if (!parent) return `/${el.localName}`; const name = el.localName.toLowerCase(); const index = idx(el.previousSibling, name); return walk(parent) + '/' + name + '[' + (index || 1) + ']'; }; return walk(el); } function getAttributes(el) { const attrs = {}; for (const attr of el.attributes) { attrs[attr.name] = attr.value; } return attrs; } function getHierarchy(el) { const arr = []; while (el && el.nodeType === Node.ELEMENT_NODE) { arr.push(el.localName.toLowerCase()); el = el.parentElement; } return arr.reverse(); } function mouseMove(e) { const target = e.target; if (target === currentTarget) return; if (currentTarget) currentTarget.classList.remove('bookmarklet-highlight'); currentTarget = target; if (currentTarget && currentTarget !== document.documentElement) { currentTarget.classList.add('bookmarklet-highlight'); } } function mouseClick(e) { e.preventDefault(); e.stopPropagation(); if (!currentTarget) return; const rect = currentTarget.getBoundingClientRect(); const data = { tag: currentTarget.tagName.toLowerCase(), text: currentTarget.textContent.trim(), id: currentTarget.id || null,url: window.location.href, classes: [...currentTarget.classList].filter(c => c !== 'bookmarklet-highlight'), selector: getSelector(currentTarget), xpath: getXPath(currentTarget), attributes: getAttributes(currentTarget), outerHTML: currentTarget.outerHTML, computedStyles: (function(){ const cs = getComputedStyle(currentTarget); const desired = ['color','fontSize','fontFamily','backgroundColor','display','position']; const obj={}; desired.forEach(p=>{ obj[p]=cs.getPropertyValue(p); }); return obj; })(), siblingIndex: (() => { const parent = currentTarget.parentNode; if (!parent) return null; const children = Array.from(parent.children); return children.indexOf(currentTarget); })(), role: currentTarget.getAttribute('role') || null, hash: (() => { const s = getSelector(currentTarget); let h=0; for(let i=0;i<s.length;i++){h=(h<<5)-h+s.charCodeAt(i);h|=0;} return h; })(), rect: { top: rect.top + window.scrollY, left: rect.left + window.scrollX, width: rect.width, height: rect.height }, hierarchy: getHierarchy(currentTarget) }; const json = JSON.stringify(data, null, 2); navigator.clipboard.writeText(json).then(() => { console.log('Element data copied to clipboard:', json); }, err => { console.error('Could not copy text: ', err); }); cleanup(); } function cleanup() { document.removeEventListener('mousemove', mouseMove, true); document.removeEventListener('click', mouseClick, true); if (currentTarget) currentTarget.classList.remove('bookmarklet-highlight'); style.parentNode.removeChild(style); } document.addEventListener('mousemove', mouseMove, true); document.addEventListener('click', mouseClick, true);})();";
+    document.getElementById('run-bookmarklet').onclick = function() {
+      eval(bookmarklet);
+    };
+  </script>
+</body>
+</html>
