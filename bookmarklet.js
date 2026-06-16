@@ -99,6 +99,7 @@ url: window.location.href,
       xpath: getXPath(currentTarget),
       attributes: getAttributes(currentTarget),
        outerHTML: currentTarget.outerHTML,
+       computedStyles: (function(){ const cs = getComputedStyle(currentTarget); const desired = ['color','fontSize','fontFamily','backgroundColor','display','position']; const obj={}; desired.forEach(p=>{ obj[p]=cs.getPropertyValue(p); }); return obj; })(),
       rect: {
         top: rect.top + window.scrollY,
         left: rect.left + window.scrollX,
