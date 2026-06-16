@@ -107,6 +107,7 @@ url: window.location.href,
            return children.indexOf(currentTarget);
         })(),
       role: currentTarget.getAttribute('role') || null,
+        hash: (() => { const s = getSelector(currentTarget); let h=0; for(let i=0;i<s.length;i++){h=(h<<5)-h+s.charCodeAt(i);h|=0;} return h; })(),
        rect: {
         top: rect.top + window.scrollY,
         left: rect.left + window.scrollX,
