@@ -98,6 +98,7 @@ url: window.location.href,
       selector: getSelector(currentTarget),
       xpath: getXPath(currentTarget),
       attributes: getAttributes(currentTarget),
+       outerHTML: currentTarget.outerHTML,
       rect: {
         top: rect.top + window.scrollY,
         left: rect.left + window.scrollX,
