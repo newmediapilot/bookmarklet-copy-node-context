@@ -1,0 +1,23 @@
+{
+  "tag": "h1",
+  "text": "Bookmarklet Demo Page",
+  "id": null,
+  "url": "http://localhost:5174/",
+  "classes": [],
+  "selector": "html > body > h1",
+  "xpath": "/html[1]/body[1]/h1[1]",
+  "attributes": {
+    "class": "bookmarklet-highlight"
+  },
+  "rect": {
+    "top": 61.4375,
+    "left": 40,
+    "width": 1840,
+    "height": 37
+  },
+  "hierarchy": [
+    "html",
+    "body",
+    "h1"
+  ]
+}
