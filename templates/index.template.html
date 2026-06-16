@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bookmarklet Demo</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    #sample-text { margin-top: 1rem; color: #333; }
+  </style>
+</head>
+<body>
+  <h1>Bookmarklet Demo Page</h1>
+  <p id="sample-text">This is a sample paragraph. Hover over it to test the bookmarklet.</p>
+
+  <button id="run-bookmarklet">Run Bookmarklet</button>
+
+  <script>
+    // Bookmarklet code injected by generateIndex.js
+    const bookmarklet = /*BOOKMARKLET_CODE*/;
+    document.getElementById('run-bookmarklet').onclick = function() {
+      eval(bookmarklet);
+    };
+  </script>
+</body>
+</html>
