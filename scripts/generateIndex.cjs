@@ -7,11 +7,8 @@ const templatePath = path.join(__dirname, '..', 'templates', 'index.template.htm
 const indexOutPath = path.join(__dirname, '..', 'index.html');
 
 try {
-  const bookmarkletRaw = fs.readFileSync(outPath, 'utf8').trim();
-  const bookmarkletCode = bookmarkletRaw.replace(/^javascript:/, '').trim();
-
-  const template = fs.readFileSync(templatePath, 'utf8');
-  const finalIndex = template.replace('/*BOOKMARKLET_CODE*/', JSON.stringify(bookmarkletCode));
+const template = fs.readFileSync(templatePath, 'utf8');
+  const finalIndex = template;
 
   fs.writeFileSync(indexOutPath, finalIndex, 'utf8');
   console.log(`Generated index.html with bookmarklet code.`);
